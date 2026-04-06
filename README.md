@@ -25,6 +25,9 @@ The stack consists of four skills that work in sequence:
 git clone https://github.com/russellteter/class-content-skills.git
 cd class-content-skills
 
+# Create the skills directory if it does not exist
+mkdir -p ~/.claude/skills/
+
 # Copy each skill folder to your Claude skills directory
 cp -r class-brand-voice ~/.claude/skills/
 cp -r class-content-writer ~/.claude/skills/
