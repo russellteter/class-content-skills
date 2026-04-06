@@ -24,96 +24,85 @@ This skill produces blog posts and long-form content for Class Technologies. It 
 
 ## The Writing Process
 
-### Phase 1: Interactive Intake (MANDATORY)
+### Phase 1: Creative Intake (MANDATORY)
 
-**This step is required every time this skill triggers.** Do not skip it, even if the user provides a detailed brief. The intake confirms alignment before any writing begins.
+**This step is required every time this skill triggers.** Do not skip it, even if the user provides a detailed brief. The intake discovers the story before any writing begins.
 
-Use the AskUserQuestion tool to run two rounds of multiple-choice questions. Wait for the user's answers to each round before proceeding.
+The intake is a decision funnel — start big picture, narrow down. Claude can infer template selection, positioning level, vertical messaging, pillar connections, and format from these four questions combined with whatever the user said in their original prompt. Do not ask the user to do Claude's job.
 
-#### Round 1: Audience, Vertical, Goal, Position
+Use the AskUserQuestion tool to run two rounds of questions. Wait for answers to Round 1 before asking Round 2.
 
-Call AskUserQuestion with these four questions:
+#### Round 1: The Seed
 
-**Question 1 — Audience**
-- question: "Who is the primary reader for this content?"
-- header: "Audience"
+These two questions extract the creative origin and the core argument. They matter more than anything else because they determine whether the content has a real point of view or is just generic category copy.
+
+Call AskUserQuestion with these two questions:
+
+**Question 1 — What sparked this?**
+- question: "Where did this content idea come from?"
+- header: "The Spark"
 - multiSelect: false
 - options:
-  - label: "L&D Director / VP of Learning" | description: "Senior learning leaders who own training strategy and budget"
-  - label: "Corporate Trainer / Facilitator" | description: "Practitioners who deliver live virtual sessions"
-  - label: "CHRO / VP of HR" | description: "HR executives focused on retention, culture, and workforce development"
-  - label: "CTO / IT Decision-Maker" | description: "Technology leaders evaluating platform security and integration"
+  - label: "A customer conversation or win" | description: "Something a customer said, did, or achieved that's worth sharing"
+  - label: "A pain point that keeps coming up" | description: "A problem you hear from prospects, trainers, or L&D teams repeatedly"
+  - label: "A trend or research finding" | description: "New data, an industry shift, or a report you want to react to"
+  - label: "A competitor claim or market gap" | description: "Something a competitor is saying that's wrong, or a category blind spot"
 
-**Question 2 — Vertical**
-- question: "Which vertical should this content target?"
-- header: "Vertical"
+**Question 2 — What's the point?**
+- question: "If the reader remembers one thing, what should it be?"
+- header: "The Takeaway"
 - multiSelect: false
 - options:
-  - label: "Corporate / Enterprise" | description: "Talent development, onboarding, retention, business impact"
-  - label: "Government / Federal" | description: "FedRAMP, compliance, security, agency-wide scale"
-  - label: "Healthcare" | description: "Patient safety, competency verification, compliance documentation"
-  - label: "Training Providers" | description: "Client ROI proof, competitive differentiation, scaling delivery"
+  - label: "There's a better way to do this than what they're doing now" | description: "Reframe their current approach — show the gap and the path forward"
+  - label: "Here's how to actually do this well" | description: "Practical, actionable guidance they can implement"
+  - label: "This problem is bigger than they realize" | description: "Raise urgency — the cost of inaction or the scale of the opportunity"
+  - label: "Other organizations are already solving this" | description: "Social proof — show what's possible with real examples"
 
-**Question 3 — Content Goal**
-- question: "What is the primary goal of this piece?"
-- header: "Goal"
-- multiSelect: false
-- options:
-  - label: "Educate (Recommended)" | description: "How-to guidance, best practices, actionable frameworks"
-  - label: "Persuade" | description: "Thought leadership, trend argument, category positioning"
-  - label: "Showcase" | description: "Customer story, case study, day-in-the-life narrative"
-  - label: "Announce" | description: "Product update, feature launch, research findings"
+#### Round 2: Shaping the Draft
 
-**Question 4 — Class Positioning**
-- question: "How prominently should Class be positioned?"
-- header: "Position"
-- multiSelect: false
-- options:
-  - label: "Soft positioning (Recommended)" | description: "Best practices first, Class mentioned as enabler in final third"
-  - label: "Strong advocacy" | description: "Clear argument favoring Class, supported by evidence and customer proof"
-  - label: "Neutral / educational" | description: "Platform-agnostic guidance, Class mentioned only in CTA"
-  - label: "No product mention" | description: "Pure thought leadership, no Class reference in body"
+After receiving Round 1 answers, ask these two questions. They determine what Claude has to work with and how to frame the piece.
 
-#### Round 2: Format, Pillars, Proof Points
+Call AskUserQuestion with these two questions:
 
-After receiving Round 1 answers, call AskUserQuestion with these three questions:
-
-**Question 5 — Content Format**
-- question: "What format and length?"
-- header: "Format"
-- multiSelect: false
-- options:
-  - label: "Blog post (Recommended)" | description: "1,400-1,800 words. Standard publishing format."
-  - label: "Customer story" | description: "1,000-1,400 words. Narrative structure built around a customer example."
-  - label: "Comprehensive guide" | description: "1,600-2,000 words. Deep framework or strategy piece."
-  - label: "Short-form" | description: "Under 1,000 words. LinkedIn article, email content, or summary piece."
-
-**Question 6 — Solution Pillars**
-- question: "Which solution pillars should this content connect to?"
-- header: "Pillars"
+**Question 3 — What do you have to work with?**
+- question: "What raw material can you bring to this piece?"
+- header: "Your Material"
 - multiSelect: true
 - options:
-  - label: "Before Training" | description: "LMS sync, templates, assessments, pre-configured breakouts"
-  - label: "During Training" | description: "Breakout oversight, engagement scoring, real-time interaction"
-  - label: "After Training" | description: "Interactive playback, analytics, completion data, post-session content"
-  - label: "Foundation" | description: "Security, accessibility, scale, platform reliability"
+  - label: "Customer quotes or specific data" | description: "Named quotes, metrics, or outcomes you can paste in or describe"
+  - label: "A rough angle or key points" | description: "You've been thinking about this — you have notes, a hot take, or bullet points"
+  - label: "A link or source to react to" | description: "An article, report, competitor page, or research you want to build around"
+  - label: "Just the topic" | description: "Starting from scratch — Claude should research and develop the angle"
 
-**Question 7 — Customer Proof Points**
-- question: "Do you have customer quotes or proof points to include?"
-- header: "Proof"
+**Question 4 — Who's reading this?**
+- question: "Picture the person reading this. What's their situation?"
+- header: "The Reader"
 - multiSelect: false
 - options:
-  - label: "I'll provide them" | description: "You have specific quotes, data, or examples to paste in"
-  - label: "Use published examples" | description: "Pull from Volvo, BCG, Marriott, GoDaddy, or other published Class stories"
-  - label: "Skip for now" | description: "Draft without customer quotes. Flag the gap in handoff notes."
+  - label: "They're evaluating tools and comparing options" | description: "Mid-funnel buyer doing research — needs proof and differentiation"
+  - label: "They train virtually but aren't getting the results they want" | description: "Practitioner who's frustrated — needs practical help and a better approach"
+  - label: "They need to justify training investment to leadership" | description: "Building a business case — needs ROI evidence and peer examples"
+  - label: "They're skeptical virtual training can match in-person" | description: "Needs to be shown, not told — proof over promises"
 
 #### After Intake
 
-Once both rounds are answered, summarize the brief back to the user in 2-3 sentences and confirm before proceeding. Example: "Got it — blog post for L&D directors in corporate, thought leadership angle with strong Class positioning, focused on During Training and After Training pillars. Using published customer examples. Writing now."
+Once both rounds are answered, do three things before writing:
 
-If the user selected "Other" on any question, incorporate their free-text response into the brief.
+1. **Synthesize the brief.** Summarize in 2-3 sentences what you're going to write and why. Example: "Writing a blog post about the hidden cost of running training on meeting tools — sparked by a pain point you keep hearing, aimed at practitioners who are frustrated with their current results. You've got some notes on key points, so I'll build around those and layer in third-party research. The piece should leave readers thinking there's a better way to do this."
+
+2. **Confirm with the user.** Wait for a go-ahead before proceeding. If anything sounds off, adjust.
+
+3. **Let Claude do the mapping.** Based on the four answers plus the user's original prompt, Claude determines:
+   - **Template** — Customer win → Template B. Pain point → Template A. Trend/research → Template C. How-to takeaway → Template D.
+   - **Positioning level** — Customer story or tool comparison reader → stronger Class presence. Trend piece or skeptical reader → softer, earn-trust-first approach.
+   - **Vertical messaging** — Pull from the brand voice messaging-pillars reference based on whatever context the user provided.
+   - **Pillar connections** — Determined by the topic itself, not by asking the user to pick from an internal list.
+   - **Format and length** — Blog (1,400-1,800 words) unless the user specified otherwise in their original prompt.
+
+   Do not ask the user to make these decisions. These are craft decisions the skill exists to make.
 
 Then proceed to Phase 2.
+
 
 ### Phase 2: Research & Evidence Gathering
 
