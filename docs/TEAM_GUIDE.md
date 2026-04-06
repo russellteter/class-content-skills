@@ -68,6 +68,14 @@ To skip the pause between draft and QA, add "and run QA when you're done" to you
 
 ---
 
+## Before You Start
+
+**You must use Claude Desktop in Cowork mode.** These skills require Cowork mode to work properly. Cowork gives Claude access to the skills system, file tools, and the interactive question cards the intake funnel uses.
+
+If you run these skills in a standard Claude Desktop chat (not Cowork), the skills will load but the intake questions won't render as clickable cards, and the branded .docx generation at the end of QA won't work.
+
+**To use Cowork mode:** Open Claude Desktop and start a Cowork session rather than a standard chat.
+
 ## Installation
 
 See the [README](../README.md) for installation instructions.
