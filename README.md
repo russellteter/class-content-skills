@@ -16,6 +16,14 @@ The stack consists of four skills that work in sequence:
 
 4. **Class Brand Document** — The formatting layer. Defines the exact typography hierarchy, color palette, table styles, and python-docx implementation for all Class-branded Word documents. Used by Content QA to produce the final deliverable.
 
+## Requirements
+
+**You must use Claude Desktop in Cowork mode.** Cowork mode is the desktop app feature that gives Claude access to skills, file tools, and the interactive question system these skills depend on.
+
+Specifically, the content writer's intake funnel uses the AskUserQuestion tool, which presents multiple-choice questions as clickable cards in the conversation. This tool is only available in Cowork mode. If you run these skills in standard Claude Desktop (without Cowork), the skills will still load but the intake questions won't render as interactive cards, and the branded .docx generation at the end of QA won't work.
+
+**To use Cowork mode:** Open Claude Desktop and start a Cowork session (rather than a standard chat). If you don't see the Cowork option, make sure your Claude Desktop app is updated to the latest version.
+
 ## Installation
 
 ### 1. Copy the skill folders to your Claude Desktop skills directory
